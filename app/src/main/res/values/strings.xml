@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">UlulTripFiltration</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title">title</string>
+    <string name="zero">0</string>
+    <string name="complexity">complexity</string>
+    <string name="price">price</string>
+    <string name="guide">guide</string>
+    <string name="category">Category</string>
+    <string name="region">region</string>
+    <string name="departure">departure</string>
+    <string name="arrival">arrival</string>
+    <string name="easy">easy</string>
+    <string name="medium">medium</string>
+    <string name="hard">hard</string>
+    <string name="extra">extra</string>
+    <string name="duration">duration</string>
+    <string name="min_price">min price</string>
+    <string name="max_price">max price</string>
+    <string name="search">search</string>
+    <string name="log_result">Log result</string>
+    <string name="clear">clear</string>
+    <string name="description">Description</string>
+</resources>
