@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.PagingData
 import androidx.viewbinding.ViewBinding
-import com.project.ulul.data.utils.Either
+import com.example.ulultripfiltration.data.utils.Either
 import com.project.ulul.ui.state.UIState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
@@ -44,6 +44,14 @@ abstract class BaseFragment<Binding : ViewBinding, ViewModel : BaseViewModel>(
     protected open fun establishRequest() {}
 
     protected open fun launchObservers() {}
+
+
+//    protected fun <T : Any> Flow<PagingData<T>>.collectPaging(
+//        lifecycleState: Lifecycle.State = Lifecycle.State.STARTED,
+//        action: suspend (value: PagingData<T>) -> Unit
+//    ) {
+//        collectFlowSafely(lifecycleState) { this.collectLatest { action(it) } }
+//    }
 
     protected fun <T : Any> Flow<PagingData<T>>.spectatePaging(
         lifecycleState: Lifecycle.State = Lifecycle.State.STARTED,

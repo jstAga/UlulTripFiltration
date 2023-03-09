@@ -1,4 +1,4 @@
-package com.project.ulul.data.utils
+package com.example.ulultripfiltration.data.utils
 
 sealed class Either<out A, out B> {
     class Left<out A>(val value: A) : Either<A, Nothing>()
