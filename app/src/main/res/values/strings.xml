@@ -22,4 +22,6 @@
     <string name="log_result">Log result</string>
     <string name="clear">clear</string>
     <string name="description">Description</string>
+    <string name="slug">slug</string>
+    <string name="kuda">Kuda</string>
 </resources>

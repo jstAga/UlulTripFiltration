@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,55 +8,56 @@
     tools:context=".ui.fragments.search.SearchFragment">
 
     <EditText
+        android:id="@+id/etTourTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/kuda"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        tools:listitem="@layout/item_hint"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/etCategory"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etTourTitle" />
+
+
+    <EditText
         android:id="@+id/etCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/category" />
+        android:hint="@string/category"
+        app:layout_constraintBottom_toTopOf="@id/etDeparture" />
+
 
     <EditText
-        android:id="@+id/etRegion"
+        android:id="@+id/etDeparture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/region" />
-
-    <EditText
-        android:id="@+id/etGuide"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/guide" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/etDeparture"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/departure" />
-
-        <EditText
-            android:id="@+id/etArrival"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/arrival" />
-    </LinearLayout>
-
+        android:hint="@string/departure"
+        app:layout_constraintBottom_toTopOf="@id/tvComplexity" />
 
     <TextView
-        android:layout_marginTop="20dp"
+        android:id="@+id/tvComplexity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
         android:text="@string/complexity"
         android:textColor="@color/black"
-        android:textSize="26sp" />
+        android:textSize="26sp"
+        app:layout_constraintBottom_toTopOf="@id/containerComplexity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
+        android:id="@+id/containerComplexity"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/tvDuration">
 
         <Button
             android:id="@+id/btnEasy"
@@ -88,79 +90,82 @@
     </LinearLayout>
 
     <TextView
-        android:layout_marginTop="20dp"
+        android:id="@+id/tvDuration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
         android:text="@string/duration"
         android:textColor="@color/black"
-        android:textSize="26sp" />
+        android:textSize="26sp"
+        app:layout_constraintBottom_toTopOf="@id/containerDuration"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
+        android:id="@+id/containerDuration"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/etMaxPrice">
 
         <Button
-            android:layout_weight="1"
+            android:id="@+id/btnOneDay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btnOneDay"
+            android:layout_weight="1"
             android:text="1" />
 
         <Button
-            android:layout_weight="1"
+            android:id="@+id/btnThreeDay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btnThreeDay"
+            android:layout_weight="1"
             android:text="3" />
 
 
         <Button
-            android:layout_weight="1"
+            android:id="@+id/btnSevenDay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btnSevenDay"
+            android:layout_weight="1"
             android:text="7" />
     </LinearLayout>
 
+    <EditText
+        android:id="@+id/etMaxPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:hint="@string/max_price"
+        app:layout_constraintBottom_toTopOf="@id/containerActions" />
+
+
     <LinearLayout
+        android:id="@+id/containerActions"
         android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
 
-        <EditText
+        <Button
+            android:id="@+id/btnClear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/etMinPrice"
             android:layout_weight="1"
-            android:hint="@string/min_price" />
+            android:text="@string/clear" />
 
-        <EditText
+        <Button
+            android:id="@+id/btnLog"
             android:layout_width="match_parent"
-            android:id="@+id/etMaxPrice"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/max_price" />
+            android:text="@string/log_result" />
+
+        <Button
+            android:id="@+id/btnSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/search" />
     </LinearLayout>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:id="@+id/btnClear"
-        android:text="@string/clear"
-        android:layout_marginTop="20dp"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:id="@+id/btnLog"
-        android:text="@string/log_result" />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:id="@+id/btnSearch"
-        android:text="@string/search" />
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

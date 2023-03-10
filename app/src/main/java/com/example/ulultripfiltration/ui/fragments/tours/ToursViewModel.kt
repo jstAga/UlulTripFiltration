@@ -16,6 +16,6 @@ class ToursViewModel @Inject constructor(private val repository: ToursRepository
     private var filter = FilterModel()
     var getPagingTour = getTours()
 
-    fun setFm(newFilter: FilterModel) = filter.changeFilter(newFilter)
+    fun setFilter(newFilter: FilterModel) = filter.changeFilter(newFilter)
     fun getTours(): Flow<PagingData<TourModel>> = repository.getTours(filter).gatherPagingRequest { it }
 }

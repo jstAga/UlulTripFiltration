@@ -23,10 +23,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(R.la
         super.constructListeners()
 
         setCategory()
-        setRegion()
-        setGuide()
         setDeparture()
-        setArrival()
         setComplexity()
         setDuration()
         setPrice()
@@ -39,13 +36,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(R.la
         binding.btnClear.setOnClickListener {
             with(filter){
                 category = ""
-                region = ""
-                guide = ""
                 date_departure = ""
-                date_arrival = ""
                 complexity = ""
                 duration = ""
-                price_min = ""
                 price_max = ""
             }
         }
@@ -65,9 +58,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(R.la
 
     private fun setPrice() {
         with(binding) {
-            etMinPrice.doAfterTextChanged {
-                filter.price_min = it.toString()
-            }
             etMaxPrice.doAfterTextChanged {
                 filter.price_max= it.toString()
             }
@@ -105,27 +95,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(R.la
         }
     }
 
-    private fun setArrival() {
-        binding.etArrival.doAfterTextChanged {
-            filter.date_arrival = it.toString()
-        }
-    }
-
     private fun setDeparture() {
         binding.etDeparture.doAfterTextChanged {
             filter.date_departure = it.toString()
-        }
-    }
-
-    private fun setGuide() {
-        binding.etGuide.doAfterTextChanged {
-            filter.guide = it.toString()
-        }
-    }
-
-    private fun setRegion() {
-        binding.etRegion.doAfterTextChanged {
-            filter.region = it.toString()
         }
     }
 

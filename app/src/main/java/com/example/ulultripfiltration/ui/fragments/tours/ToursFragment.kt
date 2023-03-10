@@ -45,7 +45,7 @@ class ToursFragment : BaseFragment<FragmentToursBinding, ToursViewModel>(R.layou
     }
 
     private fun getTours() {
-        viewModel.setFm(filter)
+        viewModel.setFilter(filter)
         viewModel.getTours()
     }
 
