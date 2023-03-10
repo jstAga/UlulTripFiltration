@@ -1,6 +1,7 @@
 package com.example.ulultripfiltration.ui.fragments.search
 
 import android.util.Log
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
@@ -10,6 +11,7 @@ import com.example.ulultripfiltration.data.model.FilterModel
 import com.example.ulultripfiltration.R
 import com.example.ulultripfiltration.core.ui.base.BaseFragment
 import com.example.ulultripfiltration.databinding.FragmentSearchBinding
+import com.example.ulultripfiltration.ui.fragments.search.adapter.HintAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,9 +20,19 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(R.la
     override val binding by viewBinding(FragmentSearchBinding::bind)
     override val viewModel by viewModels<SearchViewModel>()
     private val filter by lazy { FilterModel() }
+    private val hintAdapter by lazy { HintAdapter(this::onHintClick) }
+
+    private val hintsList = listOf("Shamsi Tour", "Tour", "True", "Track", "Talisman", "Trysy", "Topor", "Travmat", "Sound", "Slow")
+    private val maybeIt = arrayListOf<String>()
+
+    private fun onHintClick(tourTitle: String) {
+        Toast.makeText(requireContext(), tourTitle, Toast.LENGTH_SHORT).show()
+    }
 
     override fun constructListeners() {
         super.constructListeners()
+        binding.rvHints.adapter = hintAdapter
+        listenHints()
 
         setCategory()
         setDeparture()
@@ -32,9 +44,25 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(R.la
         search()
     }
 
+    private fun listenHints() {
+        binding.etTourTitle.doAfterTextChanged {
+            if (it.toString().isNotEmpty()) {
+                for (hint in hintsList) {
+                    if (hint.lowercase().contains(it.toString().lowercase()) && !maybeIt.contains(hint) && maybeIt.size < 3) {
+                        maybeIt.add(hint)
+                    }
+                }
+                hintAdapter.addData(maybeIt)
+                maybeIt.clear()
+            } else {
+                hintAdapter.notifyDataSetChanged()
+            }
+        }
+    }
+
     private fun clear() {
         binding.btnClear.setOnClickListener {
-            with(filter){
+            with(filter) {
                 category = ""
                 date_departure = ""
                 complexity = ""
@@ -59,7 +87,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(R.la
     private fun setPrice() {
         with(binding) {
             etMaxPrice.doAfterTextChanged {
-                filter.price_max= it.toString()
+                filter.price_max = it.toString()
             }
         }
     }
