@@ -1,4 +1,4 @@
-package com.project.ulul.ui.state
+package com.example.ulultripfiltration.ui.state
 
 sealed class UIState<T> {
     class Idle<T> : UIState<T>()

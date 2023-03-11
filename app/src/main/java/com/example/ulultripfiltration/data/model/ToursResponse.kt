@@ -11,6 +11,8 @@ data class ToursResponse(
     override fun responseToModel(): List<TourModel> = this.results
 }
 
+class TourModelBySlug : ArrayList<TourModel>()
+
 data class TourModel(
     val average_rating: String,
     val category: CategoryModel,

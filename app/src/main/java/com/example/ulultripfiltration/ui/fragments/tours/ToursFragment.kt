@@ -30,13 +30,13 @@ class ToursFragment : BaseFragment<FragmentToursBinding, ToursViewModel>(R.layou
         binding.rvTours.adapter = adapter
     }
 
-    override fun establishRequest() {
-        super.establishRequest()
+    override fun initRequest() {
+        super.initRequest()
         getTours()
     }
 
-    override fun launchObservers() {
-        super.launchObservers()
+    override fun initSubscribers() {
+        super.initSubscribers()
         collectTours()
     }
 

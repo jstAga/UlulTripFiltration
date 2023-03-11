@@ -4,13 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.example.ulultripfiltration.data.model.SlugModel
 import com.example.ulultripfiltration.databinding.ItemHintBinding
 
 class HintAdapter(private val onHintClick: (String) -> Unit) : Adapter<HintAdapter.HintViewHolder>() {
 
-    private val data = arrayListOf<String>()
+    private val data = arrayListOf<SlugModel>()
 
-    fun addData(newData: List<String>) {
+    fun addData(newData: List<SlugModel>) {
         data.clear()
         data.addAll(newData)
         notifyDataSetChanged()
@@ -28,11 +29,11 @@ class HintAdapter(private val onHintClick: (String) -> Unit) : Adapter<HintAdapt
     }
 
     inner class HintViewHolder(private val binding: ItemHintBinding) : ViewHolder(binding.root) {
-        fun bind(hint: String) {
-            binding.tvHint.text = hint
+        fun bind(model: SlugModel) {
+            binding.tvHint.text = model.title
 
             itemView.setOnClickListener {
-                onHintClick(hint)
+                onHintClick(model.slug)
             }
         }
     }

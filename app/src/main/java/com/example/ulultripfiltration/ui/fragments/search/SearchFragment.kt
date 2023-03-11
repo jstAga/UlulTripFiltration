@@ -10,6 +10,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.ulultripfiltration.data.model.FilterModel
 import com.example.ulultripfiltration.R
 import com.example.ulultripfiltration.core.ui.base.BaseFragment
+import com.example.ulultripfiltration.data.model.SlugModel
 import com.example.ulultripfiltration.databinding.FragmentSearchBinding
 import com.example.ulultripfiltration.ui.fragments.search.adapter.HintAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,18 +23,47 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(R.la
     private val filter by lazy { FilterModel() }
     private val hintAdapter by lazy { HintAdapter(this::onHintClick) }
 
-    private val hintsList = listOf("Shamsi Tour", "Tour", "True", "Track", "Talisman", "Trysy", "Topor", "Travmat", "Sound", "Slow")
-    private val maybeIt = arrayListOf<String>()
+    private val hintsList = arrayListOf<SlugModel>()
+    private val maybeIt = arrayListOf<SlugModel>()
 
-    private fun onHintClick(tourTitle: String) {
-        Toast.makeText(requireContext(), tourTitle, Toast.LENGTH_SHORT).show()
+    private fun onHintClick(tourSlug: String) {
+        Toast.makeText(requireContext(), tourSlug, Toast.LENGTH_SHORT).show()
+        findNavController().navigate(R.id.detailFragment, bundleOf(KEY_SlUG to tourSlug))
     }
 
-    override fun constructListeners() {
-        super.constructListeners()
-        binding.rvHints.adapter = hintAdapter
-        listenHints()
+    override fun initialize() {
+        super.initialize()
+        initAdapter()
+    }
 
+    override fun initRequest() {
+        super.initRequest()
+        getSlugs()
+    }
+
+    private fun getSlugs() {
+        viewModel.getSlugs()
+    }
+
+    private fun initAdapter() {
+        binding.rvHints.adapter = hintAdapter
+    }
+
+    override fun initSubscribers() {
+        super.initSubscribers()
+        getSlugsState()
+    }
+
+    private fun getSlugsState() {
+        viewModel.getSlugsState.collectUIState {
+            hintsList.addAll(it.results)
+        }
+    }
+
+    override fun initListeners() {
+        super.initListeners()
+
+        listenHints()
         setCategory()
         setDeparture()
         setComplexity()
@@ -48,14 +78,15 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(R.la
         binding.etTourTitle.doAfterTextChanged {
             if (it.toString().isNotEmpty()) {
                 for (hint in hintsList) {
-                    if (hint.lowercase().contains(it.toString().lowercase()) && !maybeIt.contains(hint) && maybeIt.size < 3) {
+                    if (hint.title.lowercase().contains(
+                            it.toString().lowercase()
+                        ) && !maybeIt.contains(hint) && maybeIt.size < 3
+                    ) {
                         maybeIt.add(hint)
                     }
                 }
                 hintAdapter.addData(maybeIt)
                 maybeIt.clear()
-            } else {
-                hintAdapter.notifyDataSetChanged()
             }
         }
     }
@@ -137,5 +168,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(R.la
 
     companion object {
         const val KEY_FILTER = "key.filter"
+        const val KEY_SlUG = "key.slug"
     }
 }

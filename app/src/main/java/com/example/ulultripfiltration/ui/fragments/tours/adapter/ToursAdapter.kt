@@ -29,7 +29,6 @@ class ToursAdapter(val onItemClick: (TourModel) -> Unit) :
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(model: TourModel) {
             with(binding) {
-                if (model.title.startsWith("К")){
 
                 tvId.text = model.id.toString()
                 tvTitle.text = model.title
@@ -45,7 +44,6 @@ class ToursAdapter(val onItemClick: (TourModel) -> Unit) :
                 itemView.setOnClickListener {
                     onItemClick(model)
                 }
-            }else { Log.e("aga", "isn`t startWith k: " , )}
             }
         }
     }
